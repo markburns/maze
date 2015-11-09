@@ -50,10 +50,12 @@ gem 'tzinfo-data'
 group :development do
   gem 'pry-rails'
   gem 'better_errors'
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
   gem 'rspec-rails'
+  
   gem 'factory_girl_rails'
 end
 
