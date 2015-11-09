@@ -69,3 +69,11 @@ wwwwwwwwew
 
 
 
+First pass through trying to generate a grid with a start point has resulted in 
+discovering three classes.
+
+```
+MazeGenerator
+EdgeSelector
+Point
+```
