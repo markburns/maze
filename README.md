@@ -17,7 +17,7 @@ Typically, we'd start a project by finding the motivations for the project and
 eliminating the obvious solutions and skipping unnecessary features etc.
 
 So let's assume that the business has a significantly good reason to generate mazes and
-solve them. 
+solve them.
 And that the best technology for this is a well tested rails app.
 
 Given the artifical constraints of the project, I will be adding another one.
@@ -27,7 +27,7 @@ I don't know a great deal of algorithms off the top of my head, so I also won't 
 searching for shortest path algorithms or anything of that nature.
 
 It may seem like unnecessary preamble, but the best solution for most coding tasks
-is normally not to do them at all where possible. Secondly, I want to 
+is normally not to do them at all where possible. Secondly, I want to
 preempt any questions if I were being tested now on my requirements gathering skills.
 
 
@@ -37,7 +37,7 @@ OK so we need a maze
 I like README driven development, so I'm going to make the mazes ASCII art. It will
 make them easier to write about, and testing will be more visual.
 
-So let's start with maze generation. 
+So let's start with maze generation.
 Once we can do that we can move onto solving mazes.
 
 Firstly, what is a maze?
@@ -69,7 +69,7 @@ wwwwwwwwew
 
 
 
-first pass through trying to generate a grid with a start point has resulted in 
+first pass through trying to generate a grid with a start point has resulted in
 discovering three classes.
 
 ```
@@ -79,19 +79,50 @@ point
 ```
 
 second pass and we get
+
 ```
-finishpoint
-wall
+FinishPoint
+Wall
 ```
 
 because of the keyword ruby `end`, i'll choose finish to represent end. so we now have
 start point 's' and finish point (represented by 'f').
 
 
-now maze generation is working, time to find a path through the maze
+Now blank maze generation is working, time to find a path through the maze
 
 The way it has been built means we can just overwrite the Wall in the grid.
 So we just need a way to first
   * Generate paths from start to finish
   * Generate interesting paths
+
+
+Summary
+-------
+
+Family commitments calling so going to have to call it a day. I've only really had about
+4 hours to put towards this.
+
+Tests are not passing but I've got halfway into generating the actual paths
+through the maze.
+
+An initial pass through doing a random selection of next adjacent squares was
+ending up with a path of around 800 or so in length, so obviously need to
+actually read about shortest path algorithms, and random selection of adjacent
+points is not good enough even for small mazes.
+
+As for it being a Rails app, well so far it is the beginnings of a library
+which should be simple enough to render in a web app. So far Rails isn't used
+aside from some ActiveSupport methods.
+
+I'd probably have a go at rendering in React.js and either use an API or serve
+up the components directly from Rails with `gon` in the view.
+
+Actions to create
+
+GET  mazes#new
+POST mazes#create
+GET  mazes#show
+
+GET  maze_solutions#show
 
