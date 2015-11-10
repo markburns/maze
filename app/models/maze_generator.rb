@@ -7,6 +7,13 @@ class MazeGenerator < Struct.new(:width, :height, :random)
     super
   end
 
+  def maze
+    grid.tap do |maze|
+      add_start!(maze)
+      add_finish!(maze)
+    end
+  end
+
   def grid
     height.times.map do |y|
       width.times.map do |x|
@@ -15,37 +22,31 @@ class MazeGenerator < Struct.new(:width, :height, :random)
     end
   end
 
-  def maze
-    grid.tap do |maze|
-      maze[start.y][start.x] = start
-      maze[finish.y][finish.x] = finish
-    end
-  end
-
   private
 
-  def edge_selector
-    @edge_selector ||= EdgeSelector.new(width, height, random)
+  def add_start!(maze)
+    maze[start.y][start.x] = start
+  end
+
+  def add_finish!(maze)
+    maze[finish.y][finish.x] = finish
   end
 
   def start
-    @start ||= choose_start
+    @start ||= new_point(StartPoint)
   end
 
   def finish
-    @finish ||= choose_finish
+    @finish ||= new_point(FinishPoint)
   end
 
-
-  def choose_start
+  def new_point(klass)
     point = edge_selector.next_point
 
-    StartPoint.new(point.x, point.y)
+    klass.new(point.x, point.y)
   end
 
-  def choose_finish
-    point = edge_selector.next_point
-
-    FinishPoint.new(point.x, point.y)
+  def edge_selector
+    @edge_selector ||= EdgeSelector.new(width, height, random)
   end
 end
