@@ -97,32 +97,24 @@ So we just need a way to first
   * Generate interesting paths
 
 
-Summary
--------
+Progress
+--------
 
-Family commitments calling so going to have to call it a day. I've only really had about
-4 hours to put towards this.
+So now we can generate paths from start to finish, but they look like this:
 
-Tests are not passing but I've got halfway into generating the actual paths
-through the maze.
+```
+f
 
-An initial pass through doing a random selection of next adjacent squares was
-ending up with a path of around 800 or so in length, so obviously need to
-actually read about shortest path algorithms, and random selection of adjacent
-points is not good enough even for small mazes.
 
-As for it being a Rails app, well so far it is the beginnings of a library
-which should be simple enough to render in a web app. So far Rails isn't used
-aside from some ActiveSupport methods.
 
-I'd probably have a go at rendering in React.js and either use an API or serve
-up the components directly from Rails with `gon` in the view.
+      w
+      w  s
+w     w
+w     w
+ww
+wwww ww
+```
 
-Actions to create
-
-GET  mazes#new
-POST mazes#create
-GET  mazes#show
-
-GET  maze_solutions#show
-
+Obviously we need walls in between our paths.
+An alternative is to change the rendering so that each square has walls defined
+around it, and when traversing the path you are removing walls

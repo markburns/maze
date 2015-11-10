@@ -15,8 +15,8 @@ class PathGenerator < Struct.new :maze_generator, :random
     @points = [maze_generator.start]
     p = next_point(maze_generator.start)
 
-    until p.is_a?(FinishPoint)
-      @points << p
+    while !p.is_a?(FinishPoint)
+      @points << PathPoint.from(p)
 
       p = next_point p
     end

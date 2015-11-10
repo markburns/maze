@@ -48,28 +48,27 @@ describe PathGenerator do
   end
 
   describe "#points" do
-    pending "starts at the start" do
+    it "starts at the start" do
       point = generator.points.first
 
       expect(point).to eq maze_generator.start
     end
   end
 
-  pending "adds a path to the maze" do
-    #TODO determine a valid path through maze based on seed
+  it "adds a path to the maze" do
     with_path = generator.maze
 
     match_grid with_path, <<-MAZE
-      fwwwwwwwww
-      wwwwwwwwww
-      wwwwwwwwww
-      wwwwwwwwww
-      wwwwwwwwww
-      wwwwwwwwws
-      wwwwwwwwww
-      wwwwwwwwww
-      wwwwwwwwww
-      wwwwwwwwww
+       f.........
+       ..........
+       ..........
+       ..........
+       ......w...
+       ......w..s
+       w.....w...
+       w.....w...
+       ww........
+       wwww.ww...
     MAZE
   end
 end
