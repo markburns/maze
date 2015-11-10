@@ -1,13 +1,10 @@
 class MazeGenerator < Struct.new(:width, :height, :random)
-  attr_accessor :start_x, :start_y
+  attr_writer :start, :finish
+  delegate :x, :y, to: :start, prefix: true
+  delegate :x, :y, to: :finish, prefix: true
 
   def initialize(width, height, random=Random.new)
     super
-    selector = EdgeSelector.new(width, height, random)
-
-    point = selector.next_point
-    @start_x = point.x
-    @start_y = point.y
   end
 
   def grid
@@ -21,22 +18,34 @@ class MazeGenerator < Struct.new(:width, :height, :random)
   def maze
     grid.tap do |maze|
       maze[start.y][start.x] = start
+      maze[finish.y][finish.x] = finish
     end
+  end
+
+  private
+
+  def edge_selector
+    @edge_selector ||= EdgeSelector.new(width, height, random)
   end
 
   def start
-    @start ||= StartPoint.new(start_x, start_y)
+    @start ||= choose_start
   end
 
-  class Wall < Point
-    def to_s
-      "w"
-    end
+  def finish
+    @finish ||= choose_finish
   end
 
-  class StartPoint < Point
-    def to_s
-      "s"
-    end
+
+  def choose_start
+    point = edge_selector.next_point
+
+    StartPoint.new(point.x, point.y)
+  end
+
+  def choose_finish
+    point = edge_selector.next_point
+
+    FinishPoint.new(point.x, point.y)
   end
 end

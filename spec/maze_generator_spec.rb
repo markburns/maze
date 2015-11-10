@@ -18,9 +18,9 @@ describe MazeGenerator do
     MAZE
   end
 
-  it "adds a start point" do
-    generator.start_x = 1
-    generator.start_y = 0
+  it "adds a start and finish point" do
+    generator.start = StartPoint.new(1, 0)
+    generator.finish = FinishPoint.new(8, 9)
 
     match_grid generator.maze, <<-MAZE
       wswwwwwwww
@@ -32,7 +32,7 @@ describe MazeGenerator do
       wwwwwwwwww
       wwwwwwwwww
       wwwwwwwwww
-      wwwwwwwwww
+      wwwwwwwwfw
       MAZE
   end
 

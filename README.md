@@ -77,3 +77,12 @@ MazeGenerator
 EdgeSelector
 Point
 ```
+
+Second pass and we get
+```
+FinishPoint
+Wall
+```
+
+Because of the keyword ruby `end`, I'll choose finish to represent end. So we now have
+start point 's' and finish point (represented by 'f').
