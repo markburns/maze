@@ -69,20 +69,29 @@ wwwwwwwwew
 
 
 
-First pass through trying to generate a grid with a start point has resulted in 
+first pass through trying to generate a grid with a start point has resulted in 
 discovering three classes.
 
 ```
-MazeGenerator
-EdgeSelector
-Point
+mazegenerator
+edgeselector
+point
 ```
 
-Second pass and we get
+second pass and we get
 ```
-FinishPoint
-Wall
+finishpoint
+wall
 ```
 
-Because of the keyword ruby `end`, I'll choose finish to represent end. So we now have
+because of the keyword ruby `end`, i'll choose finish to represent end. so we now have
 start point 's' and finish point (represented by 'f').
+
+
+now maze generation is working, time to find a path through the maze
+
+The way it has been built means we can just overwrite the Wall in the grid.
+So we just need a way to first
+  * Generate paths from start to finish
+  * Generate interesting paths
+

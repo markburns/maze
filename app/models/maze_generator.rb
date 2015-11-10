@@ -1,6 +1,7 @@
 class MazeGenerator < Struct.new(:width, :height, :random)
   attr_writer :start, :finish
-  delegate :x, :y, to: :start, prefix: true
+
+  delegate :x, :y, to: :start,  prefix: true
   delegate :x, :y, to: :finish, prefix: true
 
   def initialize(width, height, random=Random.new)
