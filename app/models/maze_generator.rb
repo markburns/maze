@@ -8,11 +8,27 @@ class MazeGenerator < Struct.new(:width, :height, :random)
     super
   end
 
+  def start
+    @start ||= new_point(StartPoint)
+  end
+
+  def finish
+    @finish ||= new_point(FinishPoint)
+  end
+
   def maze
     grid.tap do |maze|
       add_start!(maze)
       add_finish!(maze)
     end
+  end
+
+  def inspect
+    <<-INSPECT
+    #<Maze ##{object_id}
+#{maze.map{|r| r.join("")}.join("\n")}
+    >
+    INSPECT
   end
 
   def grid
@@ -31,14 +47,6 @@ class MazeGenerator < Struct.new(:width, :height, :random)
 
   def add_finish!(maze)
     maze[finish.y][finish.x] = finish
-  end
-
-  def start
-    @start ||= new_point(StartPoint)
-  end
-
-  def finish
-    @finish ||= new_point(FinishPoint)
   end
 
   def new_point(klass)
