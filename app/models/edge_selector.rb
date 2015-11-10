@@ -10,7 +10,6 @@ class EdgeSelector < Struct.new(:width, :height, :random)
     point
   end
 
-
   def edge?(p)
     left?(p) || top?(p) || bottom?(p) || right?(p)
   end
@@ -20,11 +19,9 @@ class EdgeSelector < Struct.new(:width, :height, :random)
   def random_point
     x = random.rand(width)
     y = random.rand(height)
+
     point = Point.new x, y
-
-
   end
-
 
   def left?(point)
     point.x == 0

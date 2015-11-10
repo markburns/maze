@@ -13,15 +13,30 @@ class MazeGenerator < Struct.new(:width, :height, :random)
   def grid
     height.times.map do |y|
       width.times.map do |x|
-        "w"
+        Wall.new(x,y)
       end
     end
   end
 
   def maze
-    maze = grid()
+    grid.tap do |maze|
+      maze[start.y][start.x] = start
+    end
+  end
 
-    maze[start_y][start_x]="s"
-    maze
+  def start
+    @start ||= StartPoint.new(start_x, start_y)
+  end
+
+  class Wall < Point
+    def to_s
+      "w"
+    end
+  end
+
+  class StartPoint < Point
+    def to_s
+      "s"
+    end
   end
 end
