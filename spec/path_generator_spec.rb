@@ -7,7 +7,7 @@ describe PathGenerator do
   let(:generator) { PathGenerator.new(maze_generator, random) }
 
   it "sanity check" do
-    match_grid maze, <<-MAZE
+    match_grid maze.points, <<-MAZE
       fwwwwwwwww
       wwwwwwwwww
       wwwwwwwwww
@@ -56,7 +56,7 @@ describe PathGenerator do
   end
 
   it "adds a path to the maze" do
-    with_path = generator.maze
+    with_path = generator.maze.points
 
     match_grid with_path, <<-MAZE
        f.........

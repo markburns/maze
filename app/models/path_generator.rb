@@ -24,15 +24,10 @@ class PathGenerator < Struct.new :maze_generator, :random
     @points
   end
 
-  def adjacent_points(point)
-    maze_generator.maze.flatten.select do |o|
-      o.adjacent_to?(point)
-    end
-  end
 
   def add_path!(maze)
     points.each do |p|
-      maze[p.y][p.x]=p
+      maze.set_point(p)
     end
   end
 
@@ -46,5 +41,11 @@ class PathGenerator < Struct.new :maze_generator, :random
     end
 
     candidate_points.sample(random: random)
+  end
+
+  def adjacent_points(point)
+    maze_generator.maze_points.flatten.select do |o|
+      o.adjacent_to?(point)
+    end
   end
 end

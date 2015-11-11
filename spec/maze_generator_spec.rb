@@ -4,7 +4,7 @@ describe MazeGenerator do
   let(:generator) { MazeGenerator.new(10, 10) }
 
   it "generates a grid" do
-    match_grid generator.grid, <<-MAZE
+    match_grid generator.maze.grid, <<-MAZE
       wwwwwwwwww
       wwwwwwwwww
       wwwwwwwwww
@@ -22,7 +22,7 @@ describe MazeGenerator do
     generator.start = StartPoint.new(1, 0)
     generator.finish = FinishPoint.new(8, 9)
 
-    match_grid generator.maze, <<-MAZE
+    match_grid generator.maze.points, <<-MAZE
       wswwwwwwww
       wwwwwwwwww
       wwwwwwwwww
