@@ -30,6 +30,7 @@ class MazeGenerator < Struct.new(:width, :height, :random)
   end
 
   private
+
   def new_point(klass)
     point = edge_selector.next_point
 
