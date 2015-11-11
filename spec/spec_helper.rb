@@ -42,7 +42,13 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-  
+
+   config.around(:each) do |example|
+     Timeout::timeout(0.5) {
+      example.run
+    }
+  end
+   
 
   #<-- Prelang[testing_framework]
   config.include GridMatching

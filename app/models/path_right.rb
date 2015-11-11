@@ -1,0 +1,3 @@
+class PathRight < PathPoint
+end
+

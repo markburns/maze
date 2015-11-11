@@ -1,0 +1,3 @@
+class PathUp < PathPoint
+end
+

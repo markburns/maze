@@ -21,14 +21,6 @@ class MazeGenerator < Struct.new(:width, :height, :random)
     @maze ||= Maze.new(width, height, start, finish)
   end
 
-  def inspect
-    <<-INSPECT
-    #<Maze ##{object_id}
-    #{maze.map{|r| r.join("")}.join("\n")}
-    >
-    INSPECT
-  end
-
   private
 
   def new_point(klass)

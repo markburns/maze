@@ -118,3 +118,38 @@ wwww ww
 Obviously we need walls in between our paths.
 An alternative is to change the rendering so that each square has walls defined
 around it, and when traversing the path you are removing walls
+
+
+Visitor Pattern
+--------------
+
+Adding the visitor pattern allows us to display the maze in a different way.
+I didn't want to end up doing tons of string manipulation so with this pattern,
+we can display a single point as e.g.
+
+`.`
+
+or as
+
+```
+---
+| |
+---
+```
+
+This will allow for defining paths for left, right, up, down etc.
+
+Path generation problem
+----------------------
+Random moving around the maze will not always result in a traversable path.
+
+```
+     PathGenerator::PathNotFound:
+       no non traversed adjacent points found, for #<struct PathDown x=6, y=4> in #<struct Maze width=10, height=10, start=#<struct StartPoint x=9, y=5>, finish=#<struct FinishPoint x=0, y=0>>
+ ```
+
+What we need to do is record where we have been and then trace back to generate more 
+alternative routes.
+
+Using a stack will allow us to record paths, then go back if we hit a dead end.
+

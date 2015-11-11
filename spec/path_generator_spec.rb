@@ -8,7 +8,7 @@ describe PathGenerator do
 
   describe "#adjacent_points" do
     it do
-      result = path_generator.adjacent_points(Point.new 2,2)
+      result = path_generator.next_path_points(Point.new 2,2)
       #0123
       #1 .
       #2.x.

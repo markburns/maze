@@ -1,0 +1,3 @@
+class PathLeft < PathPoint
+end
+
