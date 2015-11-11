@@ -24,7 +24,6 @@ class PathGenerator < Struct.new :maze_generator, :random
     @points
   end
 
-
   def add_path!(maze)
     points.each do |p|
       maze.set_point(p)
@@ -32,16 +31,21 @@ class PathGenerator < Struct.new :maze_generator, :random
   end
 
   def next_point(p)
-    candidate_points = adjacent_points(p).
-      reject{|p| Array(@points).include?(p) }.
-      select{|p| p.is_a?(Wall) || p.is_a?(FinishPoint) }
+    points = candidate_points(p)
 
-    if candidate_points.empty?
+    if points.empty?
       raise PathNotFound.new("no candidate adjacent points found, for #{p.inspect} in #{maze_generator.inspect}")
     end
 
-    candidate_points.sample(random: random)
+    points.sample(random: random)
   end
+
+  def candidate_points(p)
+    adjacent_points(p).
+      reject{|p| Array(@points).include?(p) }.
+      select{|p| p.is_a?(Wall) || p.is_a?(FinishPoint) }
+  end
+
 
   def adjacent_points(point)
     maze_generator.maze_points.flatten.select do |o|

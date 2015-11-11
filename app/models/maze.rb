@@ -1,4 +1,12 @@
 class Maze < Struct.new(:width, :height, :start, :finish)
+  def points_accept(visitor)
+    accept(visitor, :points)
+  end
+
+  def grid_accept(visitor)
+    accept(visitor, :grid)
+  end
+
   def points
     @points ||=
       begin
@@ -9,24 +17,16 @@ class Maze < Struct.new(:width, :height, :start, :finish)
       end
   end
 
-  def points_accept(visitor)
-    accept(visitor, :points)
-  end
-
-  def grid_accept(visitor)
-    accept(visitor, :grid)
-  end
-
-  def set_point(p)
-    points[p.y][p.x]=p
-  end
-
   def grid
     height.times.map do |y|
       width.times.map do |x|
         Wall.new(x,y)
       end
     end
+  end
+
+  def set_point(p)
+    points[p.y][p.x]=p
   end
 
   private
@@ -38,7 +38,6 @@ class Maze < Struct.new(:width, :height, :start, :finish)
       end
     end
   end
-
 
   def add_start!(maze)
     maze[start.y][start.x] = start
