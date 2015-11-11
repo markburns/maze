@@ -1,11 +1,12 @@
 describe Maze do
-  let(:start)  { double(x: 1, y: 0, to_s: "s") }
-  let(:finish) { double(x: 8, y: 9, to_s: "f") }
+  let(:start)  { StartPoint.new(1, 0) }
+  let(:finish) { FinishPoint.new(8, 9) }
 
   let(:maze) { Maze.new(10, 10, start, finish) }
 
   it "generates a grid" do
-    match_grid maze.grid, <<-MAZE
+    grid = maze.grid_accept(ToStringVisitor.new)
+    match_grid grid, <<-MAZE
       wwwwwwwwww
       wwwwwwwwww
       wwwwwwwwww
@@ -21,7 +22,8 @@ describe Maze do
 
   describe "#points" do
     it "includes start and finish point" do
-      match_grid maze.points, <<-MAZE
+      points = maze.points_accept(ToStringVisitor.new)
+      match_grid points, <<-MAZE
         wswwwwwwww
         wwwwwwwwww
         wwwwwwwwww

@@ -1,4 +1,6 @@
 class Point < Struct.new(:x, :y)
+  include Visitable
+
   def adjacent_to?(other)
     return false unless other.is_a?(Point)
 

@@ -1,12 +1,20 @@
 class Maze < Struct.new(:width, :height, :start, :finish)
   def points
-    @points ||= 
+    @points ||=
       begin
         grid.tap do |maze|
           add_start!(maze)
           add_finish!(maze)
         end
       end
+  end
+
+  def points_accept(visitor)
+    accept(visitor, :points)
+  end
+
+  def grid_accept(visitor)
+    accept(visitor, :grid)
   end
 
   def set_point(p)
@@ -22,6 +30,15 @@ class Maze < Struct.new(:width, :height, :start, :finish)
   end
 
   private
+
+  def accept(visitor, type)
+    send(type).map do |row|
+      row.map do |p|
+        p.accept visitor
+      end
+    end
+  end
+
 
   def add_start!(maze)
     maze[start.y][start.x] = start
