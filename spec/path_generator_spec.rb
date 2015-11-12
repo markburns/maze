@@ -46,8 +46,8 @@ describe Path::Generator do
   context "testing visitors" do
     let(:with_path) { path_generator.maze.points_accept(visitor) }
 
-    context "with a ToEmojiVisitor" do
-      let(:visitor) { ToStringVisitor.new }
+    context "with a String visitor" do
+      let(:visitor) { Visitor::String.new }
       it do
         match_grid with_path, <<-MAZE
           fwwwwwwv<w
@@ -64,8 +64,8 @@ describe Path::Generator do
       end
     end
 
-    context "with a ToStringVisitor" do
-      let(:visitor) { ToEmojiVisitor.new }
+    context "with an emoji visitor" do
+      let(:visitor) { Visitor::Emoji.new }
 
       it "adds a path to the maze" do
         match_grid with_path, <<-MAZE
