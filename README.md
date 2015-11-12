@@ -153,3 +153,36 @@ alternative routes.
 
 Using a stack will allow us to record paths, then go back if we hit a dead end.
 
+Visitor pattern
+---------------
+
+Implementation of rendering of the grid/paths with the visitor pattern allows us
+to decouple the display aspects from the logic of the maze generation.
+We can then use an `HtmlVisitor` or something similar for rendering in the front end web app.
+
+Missing space in grid
+--------------------
+
+The next challenge is to fill out the grid as they currently look like this:
+
+```
+  ◎   ▥   ▥   ▥   ▥   ▥   ▥ ▼11 ◀10   ▥
+▲33 ▼28 ◀27   ▥   ▥   ▥   ▥ ▼12 ▲9    ▥
+▲32 ▼29 ▲26   ▥   ▥ ▼15 ◀14 ◀13 ▲8  ◀7
+▲31 ◀30 ▲25 ◀24   ▥ ▶16 ▼17 ▶4  ▶5  ▲6
+  ▥   ▥   ▥ ▲23   ▥   ▥ ▼18 ▲3  ◀2    ▥
+  ▥   ▥   ▥ ▲22 ◀21 ◀20 ◀19   ▥ ▲1  ◀0
+  ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
+  ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
+  ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
+  ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
+
+```
+
+
+The integers are the index of traversals round the grid, just to aid
+debugging/understanding.
+The arrows show the direction of traversal.
+
+
+
