@@ -44,6 +44,23 @@ describe Point do
     end
   end
 
+  describe "#vertically_adjacent?" do
+    it do
+      expect_vertically_adjacent_to([2,1], [2,2], true)
+      expect_vertically_adjacent_to([5,4], [5,5], true)
+    end
+
+    it "negative case" do
+      expect_vertically_adjacent_to([5,5], [3,3], false)
+      expect_vertically_adjacent_to([5,5], [5,7], false)
+      expect_vertically_adjacent_to([5,5], [5,1], false)
+    end
+
+    def expect_vertically_adjacent_to(a,b,expected)
+      expect_next_to(a,b, :vertically_adjacent_to?, expected)
+    end
+  end
+
   describe "#left_of?" do
     it do
       expect_left_of([2,1],[3,1], true)
@@ -82,47 +99,38 @@ describe Point do
 
   describe "#below?" do
     it do
-      expect(Point.new(2,2)).to be_below Point.new(2,1)
-      expect(Point.new(4,2)).to be_below Point.new(4,1)
+      expect_below([2,2],[2,1], true)
+      expect_below([4,2],[4,1], true)
     end
 
     it "negative case" do
-      expect(Point.new(5,5)).not_to be_below Point.new(5,3)
-      expect(Point.new(5,5)).not_to be_below Point.new(4,4)
-      expect(Point.new(5,5)).not_to be_below Point.new(5,6)
-      expect(Point.new(6,6)).not_to be_below Point.new(7,7)
+      expect_below([5,5],[5,3], false)
+      expect_below([5,5],[4,4], false)
+      expect_below([5,5],[5,6], false)
+      expect_below([6,6],[7,7], false)
+    end
+
+    def expect_below(a,b,expected)
+      expect_next_to(a,b, :below?, expected)
     end
   end
 
   describe "#above?" do
     it do
-      expect(Point.new(2,2)).to be_above Point.new(2,3)
-      expect(Point.new(4,2)).to be_above Point.new(4,3)
+      expect_above([2,2],[2,3], true)
+      expect_above([4,2],[4,3], true)
     end
 
     it "negative case" do
-      expect(Point.new(5,5)).not_to be_above Point.new(5,4)
-      expect(Point.new(5,5)).not_to be_above Point.new(4,4)
-      expect(Point.new(5,5)).not_to be_above Point.new(5,7)
-      expect(Point.new(6,6)).not_to be_above Point.new(7,7)
-    end
-  end
-
-
-
-
-  describe "#vertically_adjacent?" do
-    it do
-      expect(Point.new(2,1)).to be_vertically_adjacent_to Point.new(2,2)
-      expect(Point.new(5,4)).to be_vertically_adjacent_to Point.new(5,5)
+      expect_above([5,5],[5,4], false)
+      expect_above([5,5],[4,4], false)
+      expect_above([5,5],[5,7], false)
+      expect_above([6,6],[7,7], false)
     end
 
-    it "negative case" do
-      expect(Point.new(5,5)).not_to be_horizontally_adjacent_to Point.new(3,3)
-      expect(Point.new(5,5)).not_to be_horizontally_adjacent_to Point.new(5,7)
-      expect(Point.new(5,5)).not_to be_horizontally_adjacent_to Point.new(5,1)
+    def expect_above(a,b,expected)
+      expect_next_to(a,b, :above?, expected)
     end
-
   end
 
   def expect_next_to(a,b,type,expected)
