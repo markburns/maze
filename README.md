@@ -73,9 +73,9 @@ first pass through trying to generate a grid with a start point has resulted in
 discovering three classes.
 
 ```
-mazegenerator
-edgeselector
-point
+MazeGenerator
+EdgeSelector
+Point
 ```
 
 second pass and we get
