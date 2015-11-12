@@ -21,24 +21,26 @@ describe Point do
       expect_adjacent_to([5,4], [5,5], true)
       expect_adjacent_to([5,4], [5,5], true)
     end
+
+    def expect_adjacent_to(a,b,expected)
+      expect_next_to(a,b, :adjacent_to?, expected)
+    end
   end
 
-  def expect_adjacent_to(a,b,expected)
-    a = Point.new(*a)
-    b = Point.new(*b)
-
-    expect(a.adjacent_to? b).to eq expected
-  end
   describe "#horizontally_adjacent?" do
     it do
-      expect(Point.new(2,1)).to be_horizontally_adjacent_to Point.new(3,1)
-      expect(Point.new(0,2)).to be_horizontally_adjacent_to Point.new(1,2)
+      expect_horizontally_adjacent_to([2,1], [3,1], true)
+      expect_horizontally_adjacent_to([0,2], [1,2], true)
     end
 
     it "negative case" do
-      expect(Point.new(5,5)).not_to be_vertically_adjacent_to Point.new(3,5)
-      expect(Point.new(5,5)).not_to be_vertically_adjacent_to Point.new(7,5)
-      expect(Point.new(6,6)).not_to be_vertically_adjacent_to Point.new(7,7)
+      expect_horizontally_adjacent_to([5,5], [3,5], false)
+      expect_horizontally_adjacent_to([5,5], [7,5], false)
+      expect_horizontally_adjacent_to([6,6], [7,7], false)
+    end
+
+    def expect_horizontally_adjacent_to(a,b,expected)
+      expect_next_to(a,b, :horizontally_adjacent_to?, expected)
     end
   end
 
@@ -114,5 +116,13 @@ describe Point do
     end
 
   end
+
+  def expect_next_to(a,b,type,expected)
+    a = Point.new(*a)
+    b = Point.new(*b)
+
+    expect(a.send(type,b)).to eq expected
+  end
+
 
 end
