@@ -9,18 +9,26 @@ describe Point do
     expect(point.y).to eq 0
   end
 
+
   describe "#adjacent_to?" do
     it "in the horizontal case" do
-      expect(Point.new(2,1)).to be_adjacent_to Point.new(3,1)
-      expect(Point.new(0,2)).to be_adjacent_to Point.new(1,2)
+      expect_adjacent_to([2,1], [3,1], true)
+      expect_adjacent_to([0,2], [1,2], true)
     end
 
     it "in the vertical case" do
-      expect(Point.new(2,1)).to be_adjacent_to Point.new(2,2)
-      expect(Point.new(5,4)).to be_adjacent_to Point.new(5,5)
+      expect_adjacent_to([2,1], [2,2], true)
+      expect_adjacent_to([5,4], [5,5], true)
+      expect_adjacent_to([5,4], [5,5], true)
     end
   end
 
+  def expect_adjacent_to(a,b,expected)
+    a = Point.new(*a)
+    b = Point.new(*b)
+
+    expect(a.adjacent_to? b).to eq expected
+  end
   describe "#horizontally_adjacent?" do
     it do
       expect(Point.new(2,1)).to be_horizontally_adjacent_to Point.new(3,1)

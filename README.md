@@ -185,4 +185,11 @@ debugging/understanding.
 The arrows show the direction of traversal.
 
 
+Luckily we have already created an `EdgeSelector` and a `PathGenerator` so this should be easy.
 
+Twistiness
+-----------
+
+The maze is quite twisty. I think we need to change the probability of turning to be
+a bit lower than the probability of continuing in the same direction.
+We have an array of candidate adjacent points at each point in the maze
