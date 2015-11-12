@@ -46,15 +46,19 @@ describe Point do
 
   describe "#left_of?" do
     it do
-      expect(Point.new(2,1)).to be_left_of Point.new(3,1)
-      expect(Point.new(0,2)).to be_left_of Point.new(1,2)
+      expect_left_of([2,1],[3,1], true)
+      expect_left_of([0,2],[1,2], true)
     end
 
     it "negative case" do
-      expect(Point.new(5,5)).not_to be_left_of Point.new(4,5)
-      expect(Point.new(5,5)).not_to be_left_of Point.new(3,5)
-      expect(Point.new(5,5)).not_to be_left_of Point.new(7,5)
-      expect(Point.new(6,6)).not_to be_left_of Point.new(7,7)
+      expect_left_of([5,5],[4,5], false)
+      expect_left_of([5,5],[3,5], false)
+      expect_left_of([5,5],[7,5], false)
+      expect_left_of([6,6],[7,7], false)
+    end
+
+    def expect_left_of(a,b,expected)
+      expect_next_to(a,b, :left_of?, expected)
     end
   end
 
