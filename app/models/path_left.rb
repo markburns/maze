@@ -1,3 +1,0 @@
-class PathLeft < PathPoint
-end
-

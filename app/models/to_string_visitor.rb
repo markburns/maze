@@ -14,4 +14,20 @@ class ToStringVisitor < BaseVisitor
   def visit_FinishPoint subject
     "f"
   end
+
+  def visit_PathUp subject
+    "^"
+  end
+
+  def visit_PathDown subject
+    "v"
+  end
+
+  def visit_PathLeft subject
+    "<"
+  end
+
+  def visit_PathRight subject
+    "<"
+  end
 end

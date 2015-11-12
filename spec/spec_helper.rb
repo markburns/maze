@@ -44,9 +44,8 @@ RSpec.configure do |config|
   end
 
    config.around(:each) do |example|
-     Timeout::timeout(0.5) {
-      example.run
-    }
+     #Timeout::timeout(0.5) { example.run #}
+     example.run 
   end
    
 

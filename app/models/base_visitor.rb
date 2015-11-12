@@ -1,6 +1,7 @@
 class BaseVisitor
   def visit(subject)
-    method_name = "visit_#{subject.class}".intern
+    klass_name = subject.class.name.gsub("::","")
+    method_name = "visit_#{klass_name}".intern
 
     send(method_name, subject )
   end
