@@ -6,6 +6,13 @@ module GridMatching
   end
 
   def match_grid(a, b)
-    expect(format_grid(a)).to eq b.strip_heredoc.chomp.gsub(/\s*$/, "")
+    a = strip_whitespace(format_grid(a))
+    b = strip_whitespace(b.strip_heredoc.chomp.gsub(/\s*$/, ""))
+
+    expect(a).to eq b
+  end
+
+  def strip_whitespace(a)
+    a.gsub(/^\s*/, "")
   end
 end

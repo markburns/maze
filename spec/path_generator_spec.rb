@@ -69,7 +69,7 @@ describe Path::Generator do
 
       it "adds a path to the maze" do
         match_grid with_path, <<-MAZE
-          ◎     ▥   ▥   ▥   ▥   ▥   ▥ ▼11 ◀10   ▥
+            ◎   ▥   ▥   ▥   ▥   ▥   ▥ ▼11 ◀10   ▥
           ▲33 ▼28 ◀27   ▥   ▥   ▥   ▥ ▼12 ▲9    ▥
           ▲32 ▼29 ▲26   ▥   ▥ ▼15 ◀14 ◀13 ▲8  ◀7
           ▲31 ◀30 ▲25 ◀24   ▥ ▶16 ▼17 ▶4  ▶5  ▲6
