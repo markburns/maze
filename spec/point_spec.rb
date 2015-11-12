@@ -64,15 +64,19 @@ describe Point do
 
   describe "#right_of?" do
     it do
-      expect(Point.new(2,1)).to be_right_of Point.new(1,1)
-      expect(Point.new(4,2)).to be_right_of Point.new(3,2)
+      expect_right_of([2,1],[1,1], true)
+      expect_right_of([4,2],[3,2], true)
     end
 
     it "negative case" do
-      expect(Point.new(5,5)).not_to be_right_of Point.new(3,5)
-      expect(Point.new(5,5)).not_to be_right_of Point.new(6,5)
-      expect(Point.new(5,5)).not_to be_right_of Point.new(7,5)
-      expect(Point.new(6,6)).not_to be_right_of Point.new(7,7)
+      expect_right_of([5,5],[3,5], false)
+      expect_right_of([5,5],[6,5], false)
+      expect_right_of([5,5],[7,5], false)
+      expect_right_of([6,6],[7,7], false)
+    end
+
+    def expect_right_of(a,b,expected)
+      expect_next_to(a,b, :right_of?, expected)
     end
   end
 
