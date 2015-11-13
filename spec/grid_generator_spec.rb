@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe GridGenerator do
   let(:generator) { GridGenerator.new(10, 10, random) }
 

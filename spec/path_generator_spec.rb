@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Path::Generator do
   let(:grid) { grid_generator.grid }
   let(:grid_generator) { GridGenerator.new(10,10, random) }
