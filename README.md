@@ -30,6 +30,36 @@ It may seem like unnecessary preamble, but the best solution for most coding tas
 is normally not to do them at all where possible. Secondly, I want to
 preempt any questions if I were being tested now on my requirements gathering skills.
 
+Tests
+------
+
+Please run the tests with spring. 
+
+```
+spring rspec spec                                                                                [2.2.2]
+```
+
+Resolving dependencies between files manually is not worth it
+when we have `ActiveSupport::Dependencies` available anyway. The tests are fast enough.
+
+```
+markburns@Marks-MacBook-Air ~/code/maze (master●)$ time spring rspec spec                                                                    [2.2.2]
+...............................................
+
+Finished in 0.1919 seconds (files took 0.20495 seconds to load)
+47 examples, 0 failures
+
+spring rspec spec  0.23s user 0.08s system 34% cpu 0.893 total
+
+markburns@Marks-MacBook-Air ~/code/maze (master●)$ time bundle exec spring rspec spec                                                                    [2.2.2]
+...............................................
+
+Finished in 0.24164 seconds (files took 0.28236 seconds to load)
+47 examples, 0 failures
+
+bundle exec spring rspec spec  0.68s user 0.17s system 49% cpu 1.702 total
+```
+
 
 OK so we need a maze
 ===================
