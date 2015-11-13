@@ -64,24 +64,10 @@ class Path
 
     def next_path_points(here, index=0, points=all_points)
       points.map do |other|
-        if other.adjacent_to?(here)
-          klass = directional_path_klass_from(here, other)
-
+        if klass = other.adjacent_to?(here)
           [klass.from(here, index), other]
         end
       end.compact
-    end
-
-    def directional_path_klass_from(here, other)
-      if other.left_of?(here)
-        Left
-      elsif other.right_of?(here)
-        Right
-      elsif other.below?(here)
-        Down
-      elsif other.above?(here)
-        Up
-      end
     end
 
     def all_points

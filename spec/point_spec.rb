@@ -9,17 +9,16 @@ describe Point do
     expect(point.y).to eq 0
   end
 
-
   describe "#adjacent_to?" do
     it "in the horizontal case" do
-      expect_adjacent_to([2,1], [3,1], true)
-      expect_adjacent_to([0,2], [1,2], true)
+      expect_adjacent_to([2,1], [3,1], Path::Left)
+      expect_adjacent_to([0,2], [1,2], Path::Left)
     end
 
     it "in the vertical case" do
-      expect_adjacent_to([2,1], [2,2], true)
-      expect_adjacent_to([5,4], [5,5], true)
-      expect_adjacent_to([5,4], [5,5], true)
+      expect_adjacent_to([2,1], [2,2], Path::Up)
+      expect_adjacent_to([5,4], [5,5], Path::Up)
+      expect_adjacent_to([5,4], [5,3], Path::Down)
     end
 
     def expect_adjacent_to(a,b,expected)
@@ -139,6 +138,4 @@ describe Point do
 
     expect(a.send(type,b)).to eq expected
   end
-
-
 end

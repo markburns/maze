@@ -4,7 +4,15 @@ class Point < Struct.new(:x, :y)
   def adjacent_to?(other)
     return false unless other.is_a?(Point)
 
-    horizontally_adjacent_to?(other) || vertically_adjacent_to?(other)
+    if left_of?(other)
+      Path::Left
+    elsif right_of?(other)
+      Path::Right
+    elsif above?(other)
+      Path::Up
+    elsif below?(other)
+      Path::Down
+    end
   end
 
   def horizontally_adjacent_to?(other)
