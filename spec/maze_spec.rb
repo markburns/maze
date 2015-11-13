@@ -1,13 +1,13 @@
-describe Maze do
+describe Grid do
   let(:visitor) { Visitor::String.new }
   let(:start)  { StartPoint.new(1, 0) }
   let(:finish) { FinishPoint.new(8, 9) }
 
-  let(:maze) { Maze.new(10, 10, start, finish) }
+  let(:grid) { Grid.new(10, 10, start, finish) }
 
   it "generates a grid" do
-    grid = maze.grid_accept(visitor)
-    match_grid grid, <<-MAZE
+    points = grid.grid_accept(visitor)
+    match_grid points, <<-GRID
       wwwwwwwwww
       wwwwwwwwww
       wwwwwwwwww
@@ -18,13 +18,13 @@ describe Maze do
       wwwwwwwwww
       wwwwwwwwww
       wwwwwwwwww
-    MAZE
+    GRID
   end
 
   describe "#points" do
     it "includes start and finish point" do
-      points = maze.points_accept(visitor)
-      match_grid points, <<-MAZE
+      points = grid.points_accept(visitor)
+      match_grid points, <<-GRID
         wswwwwwwww
         wwwwwwwwww
         wwwwwwwwww
@@ -35,7 +35,7 @@ describe Maze do
         wwwwwwwwww
         wwwwwwwwww
         wwwwwwwwfw
-      MAZE
+      GRID
     end
 
 

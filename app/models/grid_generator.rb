@@ -1,4 +1,4 @@
-class MazeGenerator < Struct.new(:width, :height, :random)
+class GridGenerator < Struct.new(:width, :height, :random)
   attr_writer :start, :finish
 
   delegate :x, :y,  to: :start,  prefix: true
@@ -17,8 +17,8 @@ class MazeGenerator < Struct.new(:width, :height, :random)
     @finish ||= new_point(FinishPoint)
   end
 
-  def maze
-    @maze ||= Maze.new(width, height, start, finish)
+  def grid
+    @grid ||= Grid.new(width, height, start, finish)
   end
 
   private

@@ -1,17 +1,10 @@
 class Path
-  class Generator < Struct.new :maze_generator, :random
+  class Generator < Struct.new :grid, :start, :finish, :random
     def maze
-      maze_generator.maze.tap do |maze|
-        maze.set_point(maze_generator.finish)
-        add_path!(maze)
-      end
-    end
-
-    def add_path!(maze)
-      define_points!
-
-      path.each do |p|
-        maze.set_point(p)
+      @maze ||= grid.tap do |maze|
+        define_points!
+        maze.set_points(start, finish)
+        maze.set_points(*path.each)
       end
     end
 
@@ -21,7 +14,7 @@ class Path
 
     def define_points!
       index = 0
-      point = maze_generator.start
+      point = start
       path << point
 
       until point.is_a?(FinishPoint)
@@ -71,7 +64,7 @@ class Path
     end
 
     def all_points
-      @all_points ||= maze_generator.maze_points.flatten
+      @all_points ||= grid.points.flatten
     end
   end
 end

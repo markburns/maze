@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe Path::Generator do
-  let(:maze) { maze_generator.maze }
-  let(:maze_generator) { MazeGenerator.new(10,10, random) }
+  let(:grid) { grid_generator.grid }
+  let(:grid_generator) { GridGenerator.new(10,10, random) }
+  let(:start) { grid_generator.start }
+  let(:finish) { grid_generator.finish }
+
   let(:random) { Random.new 1 }
-  let(:path_generator) { Path::Generator.new(maze_generator, random) }
+  let(:path_generator) { Path::Generator.new(grid, start, finish, random) }
 
   describe "#adjacent_points" do
     it do
@@ -27,10 +30,8 @@ describe Path::Generator do
 
   describe "#next_point" do
     it "fetches an adjacent point" do
-      start_point = maze_generator.start
-
-      _, next_point = path_generator.next_point(start_point)
-      expect(next_point).to be_adjacent_to(start_point)
+      _, next_point = path_generator.next_point(start)
+      expect(next_point).to be_adjacent_to(start)
     end
   end
 
@@ -39,7 +40,7 @@ describe Path::Generator do
       path_generator.define_points!
       point = path_generator.path.first
 
-      expect(point).to eq maze_generator.start
+      expect(point).to eq start
     end
   end
 

@@ -1,4 +1,4 @@
-class Maze < Struct.new(:width, :height, :start, :finish)
+class Grid < Struct.new(:width, :height, :start, :finish)
   def points_accept(visitor)
     accept(visitor, :points)
   end
@@ -23,6 +23,10 @@ class Maze < Struct.new(:width, :height, :start, :finish)
         Wall.new(x,y)
       end
     end
+  end
+
+  def set_points(*points)
+    points.each{|p| set_point(p) }
   end
 
   def set_point(p)
