@@ -8,8 +8,10 @@ module Visitor
       "▥"
     end
 
+    START_POINT = "🚶"
+
     def visit_StartPoint subject
-      "　"
+      START_POINT
     end
 
     def visit_FinishPoint subject

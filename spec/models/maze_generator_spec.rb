@@ -58,7 +58,7 @@ describe MazeGenerator do
       let(:visitor) { Visitor::Emoji.new }
       it do
         match_grid with_path, <<-MAZE
-          ▼▶▥▶▶▼▶▶▶▥
+          #{Visitor::Emoji::START_POINT}▶▥▶▶▼▶▶▶▥
           ▼▶▼▲◀▼▼◀▶▼
           ▶▲▼▥▲▼▼▲▼◀
           ▶▥▶▶▲▼▥▲▼▥
