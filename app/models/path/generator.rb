@@ -26,33 +26,15 @@ class Path
         path.dead_end!
       end
 
+      if start.is_a?(StartPoint)
+        path[0] = StartPoint.from path[0]
+      end
+
       path
-    end
-
-    def stop_search?(p)
-      dead_end?(p) || finish?(p) || visited_everywhere?
-    end
-
-    def dead_end?(p)
-      p.kind_of?(Path::DeadEnd)
-    end
-
-    def finish?(p)
-      p.kind_of?(FinishPoint)
-    end
-
-    def visited_everywhere?
-      traversed_points.length >= placeable_locations.length
     end
 
     def path
       @path ||= Path.new
-    end
-
-    def pretty_path
-      @visitor ||= Visitor::Emoji.new
-      message = path.accept(@visitor).join("\t")
-      puts message
     end
 
     def next_point(p)
@@ -79,11 +61,6 @@ class Path
       points.sample(random: random)
     end
 
-    def decrement_dead_end_count!
-      @dead_end_count ||= 0
-      @dead_end_count = [@dead_end_count - 1, 0].max
-    end
-
     def next_candidate_path_points(here, points=placeable_locations)
       points.map do |other|
         if klass = other.adjacent_to?(here)
@@ -93,6 +70,29 @@ class Path
     end
 
     private
+
+    def stop_search?(p)
+      dead_end?(p) || finish?(p) || visited_everywhere?
+    end
+
+    def dead_end?(p)
+      p.kind_of?(Path::DeadEnd)
+    end
+
+    def finish?(p)
+      p.kind_of?(FinishPoint)
+    end
+
+    def visited_everywhere?
+      traversed_points.length >= placeable_locations.length
+    end
+
+
+    def decrement_dead_end_count!
+      @dead_end_count ||= 0
+      @dead_end_count = [@dead_end_count - 1, 0].max
+    end
+
 
     def non_path_points(p)
       candidate_points = next_candidate_path_points(p)
