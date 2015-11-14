@@ -60,6 +60,33 @@ Finished in 0.24164 seconds (files took 0.28236 seconds to load)
 bundle exec spring rspec spec  0.68s user 0.17s system 49% cpu 1.702 total
 ```
 
+Spec timeouts
+-------------
+
+As there are some `while`/`until`s in the code, sometimes when developing there may be a bug that
+hangs the specs
+Set the TIMEOUT environment variable when running specs to prevent this.
+
+```
+TIMEOUT=true spring rspec
+```
+
+Tip
+----
+Save yourself more time by aliasing
+`sr='spring rspec'`
+
+Bonus Tip
+----
+Save yourself even more time by using vim with [yadr](https://github.com/skwp/dotfiles)
+and executing individual specs with
+
+`,sl`
+
+and the whole file with
+`,ss`
+
+
 
 OK so we need a maze
 ===================
@@ -223,3 +250,11 @@ Twistiness
 The maze is quite twisty. I think we need to change the probability of turning to be
 a bit lower than the probability of continuing in the same direction.
 We have an array of candidate adjacent points at each point in the maze
+
+
+Deadends
+--------
+
+So even though the code will traverse back along a path one step, it can still block the exit 
+or hit a deadend. So we need to be able to traverse back further and record where we have been.
+
