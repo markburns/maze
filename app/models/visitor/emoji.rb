@@ -15,23 +15,23 @@ module Visitor
     end
 
     def visit_FinishPoint _
-      format "◎"
+      format "🚪"
     end
 
     def visit_PathUp _ 
-      format "▲"
+      format "↑"
     end
 
     def visit_PathDown _
-      format "▼"
+      format "↓"
     end
 
     def visit_PathLeft _
-      format "◀"
+      format "←"
     end
 
     def visit_PathRight _
-      format "▶"
+      format "→"
     end
 
     def visit_PathDeadEnd _
