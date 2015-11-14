@@ -8,7 +8,6 @@ class Path
       index = 0
       path.push(point=start)
 
-
       until point.is_a?(FinishPoint) || traversed_points.length >= placeable_locations.length
         here, point, index = next_point(point, index)
         here.index = index
