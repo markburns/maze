@@ -267,7 +267,7 @@ Missing Space and Deadends are fixed
 and removing the debug info for paths the mazes look like this:
 
 ```
-🚶   →  ▥  →  →  ↓  →  →  →  ▥
+🚶  →  ▥  →  →  ↓  →  →  →  ▥
 ↓  →  ↓  ↑  ←  ↓  ↓  ←  →  ↓
 →  ↑  ↓  ▥  ↑  ↓  ↓  ↑  ↓  ←
 →  ▥  →  →  ↑  ↓  ▥  ↑  ↓  ▥
