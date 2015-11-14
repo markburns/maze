@@ -26,12 +26,9 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
 
   def remove_all_walls!
     while walls_remaining?
-      start  = random_wall_point
-      finish = random_wall_point
-
       generator = Path::Generator.new(
         wall_points,
-        start, finish, random
+        nil, nil, random
       )
 
       path = generator.create_path!
@@ -40,10 +37,6 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
         @maze.set_points(*path)
       end
     end
-  end
-
-  def random_wall_point
-    wall_points.sample random: random
   end
 
   def wall_points

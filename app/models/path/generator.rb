@@ -2,6 +2,13 @@ class Path
   class Generator < Struct.new :placeable_locations, :start, :finish, :random
     DeadendException = Class.new StandardError
 
+    def initialize(placeable_locations, start, finish, random)
+      start   ||= placeable_locations.sample(random: random)
+      finish  ||= placeable_locations.sample(random: random)
+
+      super
+    end
+
     def create_path!
       index = 0
       point=start
