@@ -11,7 +11,7 @@ module Visitor
     START_POINT = "🚶"
 
     def visit_StartPoint _
-      format START_POINT
+      START_POINT + "  "
     end
 
     def visit_FinishPoint _
