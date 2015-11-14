@@ -258,3 +258,17 @@ Deadends
 So even though the code will traverse back along a path one step, it can still block the exit 
 or hit a deadend. So we need to be able to traverse back further and record where we have been.
 
+
+Missing Space and Deadends are fixed
+
+and removing the debug info for paths the mazes look like this:
+
+          ▼▶▼▲◀▼▼◀▶▼
+          ▶▲▼▥▲▼▼▲▼◀
+          ▶▥▶▶▲▼▥▲▼▥
+          ▼◀◀▶▼▶▼▲◀▼
+          ▼▶▶▲▼▥▼▶▼▼
+          ▼▲▼▥▶▼▶▲▼▼
+          ▶▼▲◀▥▼▥▼◀▼
+          ▥▼▼▲◀▶▼▼▥◀
+          ▶◀▶▥▲◀◀▶▶◎
