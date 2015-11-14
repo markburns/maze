@@ -3,20 +3,14 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
   attr_writer :path_generator
 
   delegate :points, to: :maze,   prefix: true
-
+  delegate :rows, to: :maze
 
   def maze
     @maze ||= create_maze_with_paths!
   end
 
   def create_maze_with_paths!
-    path = nil
-
-    begin
-      create_maze!
-      path = happy_path_generator.create_path!
-    end until path && !path.dead_end
-
+    path = create_happy_path!
     @maze.set_points(*path)
 
     remove_all_walls!
@@ -24,19 +18,25 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
     @maze
   end
 
+  def create_happy_path!
+    path = nil
+
+    begin
+      create_maze!
+      path = happy_path_generator.create_path!
+    end until path && !path.dead_end
+
+    path
+  end
+
   def remove_all_walls!
-    while walls_remaining?
-      generator = Path::Generator.new(
-        wall_points,
-        nil, nil, random
-      )
+    remove_walls!  while walls_remaining?
+  end
 
-      path = generator.create_path!
+  def remove_walls!
+    path = wall_path_generator.create_path!
 
-      if path.any?
-        @maze.set_points(*path)
-      end
-    end
+    @maze.set_points(*path)
   end
 
   def wall_points
@@ -55,14 +55,6 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
     rows.flatten
   end
 
-  delegate :rows, to: :maze
-
-  def happy_path_generator
-    Path::Generator.new(
-      @maze.points_of_type(Wall, StartPoint, FinishPoint),
-      start, finish, random
-    )
-  end
 
   def start
     @start ||= new_edge_point(StartPoint)
@@ -73,6 +65,20 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
   end
 
   private
+
+  def happy_path_generator
+    Path::Generator.new(
+      @maze.points_of_type(Wall, StartPoint, FinishPoint),
+      start, finish, random
+    )
+  end
+
+  def wall_path_generator
+    Path::Generator.new(
+      wall_points,
+      nil, nil, random
+    )
+  end
 
   def new_edge_point(klass)
     point = edge_selector.next_point
