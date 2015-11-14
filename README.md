@@ -306,3 +306,26 @@ Rendering to be more maze like
 Now that maze generation is working it would be nice to have an easier way to view them,
 and for them to look prettier.
 
+
+No branching
+------------
+
+The current solution provides a single route through the maze without any chance
+of making a mistake. Would need to include branching to make the mazes more playable
+
+Problem in representation
+----------------------------
+
+The representation of the maze considers each square in the grid to have a direction.
+
+Really for a maze a point in a grid needs to have representations of (multiple) entrances and
+exits, rather than a direction to the next valid point.
+
+This will require a refactor of the representations. I think it would make sense to introduce
+a `GridLocation` object, and make it so that a `GridLocation` will have
+one or more `Path::Up`, etc.
+
+Then rendering of the entrances/exits to each grid square becomes trivial
+
+
+

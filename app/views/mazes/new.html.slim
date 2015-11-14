@@ -1,0 +1,7 @@
+.row
+- [5, 10, 12].each do |size|
+  .col-xs-4.col-lg-1
+    = simple_form_for @maze do |f|
+      = f.hidden_field :size, value: size
+      = f.submit "#{size}x#{size} Maze", class: "btn btn-submit btn-primary"
+

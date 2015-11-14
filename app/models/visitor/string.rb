@@ -29,7 +29,7 @@ module Visitor
     end
 
     def visit_PathRight _
-      "<"
+      ">"
     end
 
     def visit_PathDeadEnd _

@@ -12,7 +12,6 @@ describe MazeGenerator do
   end
 
   let(:path_generator) { Path::Generator.new(grid, start, finish, Random.new(1)) }
-  
 
   before do
     allow(edge_selector).to receive(:next_point).and_return start, finish

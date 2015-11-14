@@ -1,7 +1,7 @@
 class Maze < Grid
   attr_reader :start, :finish
 
-  def initialize(width, height, start, finish)
+  def initialize(width=nil, height=nil, start=nil, finish=nil)
     super(width, height)
 
     @start = start

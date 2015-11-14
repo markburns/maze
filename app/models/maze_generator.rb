@@ -5,6 +5,13 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
   delegate :points, to: :maze,   prefix: true
   delegate :rows, to: :maze
 
+  def initialize(grid, edge_selector=nil, random=nil)
+    edge_selector ||= EdgeSelector.new(grid)
+    random ||= Random.new
+
+    super grid, edge_selector, random
+  end
+
   def maze
     @maze ||= create_maze_with_paths!
   end
