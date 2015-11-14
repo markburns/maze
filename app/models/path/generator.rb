@@ -63,9 +63,9 @@ class Path
 
     def next_candidate_path_points(here, points=placeable_locations)
       points.map do |other|
-        if klass = other.adjacent_to?(here)
-          [klass.from(here), other]
-        end
+        klass = other.adjacent_to?(here)
+
+        [klass.from(here), other] if klass
       end.compact
     end
 
@@ -97,7 +97,7 @@ class Path
     def non_path_points(p)
       candidate_points = next_candidate_path_points(p)
 
-      here, finish = candidate_points.find do |here, next_point|
+      here, finish = candidate_points.find do |_, next_point|
         next_point.kind_of?(FinishPoint)
       end
 

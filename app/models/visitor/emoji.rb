@@ -1,40 +1,40 @@
 module Visitor
   class Emoji < Base
-    def visit_PathPoint subject
+    def visit_PathPoint _
       "."
     end
 
-    def visit_Wall subject
+    def visit_Wall _
       "▥"
     end
 
     START_POINT = "🚶"
 
-    def visit_StartPoint subject
+    def visit_StartPoint _
       START_POINT
     end
 
-    def visit_FinishPoint subject
+    def visit_FinishPoint _
       "◎"
     end
 
-    def visit_PathUp(subject)
+    def visit_PathUp _ 
       "▲"
     end
 
-    def visit_PathDown subject
+    def visit_PathDown _
       "▼"
     end
 
-    def visit_PathLeft subject
+    def visit_PathLeft _
       "◀"
     end
 
-    def visit_PathRight subject
+    def visit_PathRight _
       "▶"
     end
 
-    def visit_PathDeadEnd subject
+    def visit_PathDeadEnd _
       "▥"
     end
   end

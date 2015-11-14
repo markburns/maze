@@ -1,38 +1,38 @@
 module Visitor
   class String < Base
-    def visit_PathPoint subject
+    def visit_PathPoint _
       "."
     end
 
-    def visit_Wall subject
+    def visit_Wall _
       "w"
     end
 
-    def visit_StartPoint subject
+    def visit_StartPoint _
       "s"
     end
 
-    def visit_FinishPoint subject
+    def visit_FinishPoint _
       "f"
     end
 
-    def visit_PathUp subject
+    def visit_PathUp _
       "^"
     end
 
-    def visit_PathDown subject
+    def visit_PathDown _
       "v"
     end
 
-    def visit_PathLeft subject
+    def visit_PathLeft _
       "<"
     end
 
-    def visit_PathRight subject
+    def visit_PathRight _
       "<"
     end
 
-    def visit_PathDeadEnd subject
+    def visit_PathDeadEnd _
       "x"
     end
   end

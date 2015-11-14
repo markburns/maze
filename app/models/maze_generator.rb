@@ -20,11 +20,11 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
 
   def create_happy_path!
     path = nil
-
-    begin
+    loop do
       create_maze!
       path = happy_path_generator.create_path!
-    end until path && !path.dead_end
+      break unless path.dead_end
+    end
 
     path
   end
