@@ -1,7 +1,7 @@
 module Visitor
   module GridVisitable
     def accept(visitor)
-      points.map do |row|
+      rows.map do |row|
         row.map do |p|
           p.accept visitor
         end

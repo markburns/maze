@@ -8,12 +8,12 @@ class Maze < Grid
     @finish = finish
   end
 
-  def points
-    @points ||=
+  def rows
+    @rows ||=
       begin
         super
         set_points(start, finish)
-        @points
+        @rows
       end
   end
 end

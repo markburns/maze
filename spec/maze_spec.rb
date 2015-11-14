@@ -4,10 +4,10 @@ describe Maze do
   let(:maze) { Maze.new(10,10,start, finish) }
 
   it "adds the start point" do
-    expect(maze.points[start.y][start.x]).to eq start
+    expect(maze.rows[start.y][start.x]).to eq start
   end
 
   it "adds the finish point" do
-    expect(maze.points[finish.y][finish.x]).to eq finish
+    expect(maze.rows[finish.y][finish.x]).to eq finish
   end
 end
