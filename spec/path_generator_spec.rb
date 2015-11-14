@@ -1,15 +1,14 @@
 describe Path::Generator do
-  let(:grid) { grid_generator.grid }
-  let(:grid_generator) { GridGenerator.new(10,10, random) }
-  let(:start) { grid_generator.start }
-  let(:finish) { grid_generator.finish }
+  let(:grid) {Grid.new 10,10 }
+  let(:start) { StartPoint.new 9,5 }
+  let(:finish) { FinishPoint.new 0,0 }
 
   let(:random) { Random.new 1 }
   let(:path_generator) { Path::Generator.new(grid, start, finish, random) }
 
   describe "#adjacent_points" do
     it do
-      result = path_generator.next_path_points(Point.new 2,2)
+      result = path_generator.next_candidate_path_points(Point.new 2,2)
       #0123
       #1 .
       #2.x.
@@ -43,22 +42,22 @@ describe Path::Generator do
   end
 
   context "testing visitors" do
-    let(:with_path) { path_generator.maze.points_accept(visitor) }
+    let(:with_path) { path_generator.maze.accept(visitor) }
 
     context "with a String visitor" do
       let(:visitor) { Visitor::String.new }
       it do
         match_grid with_path, <<-MAZE
-          fwwwwwwv<w
-          ^v<wwwwv^w
-          ^v^wwv<<^<
-          ^<^<w<v<<^
-          www^wwv^<w
-          www^<<<w^<
-          wwwwwwwwww
-          wwwwwwwwww
-          wwwwwwwwww
-          wwwwwwwwww
+          fwwwwwwwww
+          ^v<wwwwwww
+          ^v^wwv<<ww
+          ^<^<w<v^<w
+          www^wwv<^w
+          www^<<<^vs
+          wwwwww<^vw
+          wwww<<^v<w
+          wwww^<v<ww
+          wwwww^<www
         MAZE
       end
     end
@@ -68,16 +67,17 @@ describe Path::Generator do
 
       it "adds a path to the maze" do
         match_grid with_path, <<-MAZE
-            ◎   ▥   ▥   ▥   ▥   ▥   ▥ ▼11 ◀10   ▥
-          ▲33 ▼28 ◀27   ▥   ▥   ▥   ▥ ▼12 ▲9    ▥
-          ▲32 ▼29 ▲26   ▥   ▥ ▼15 ◀14 ◀13 ▲8  ◀7
-          ▲31 ◀30 ▲25 ◀24   ▥ ▶16 ▼17 ▶4  ▶5  ▲6
-            ▥   ▥   ▥ ▲23   ▥   ▥ ▼18 ▲3  ◀2    ▥
-            ▥   ▥   ▥ ▲22 ◀21 ◀20 ◀19   ▥ ▲1  ◀0
-            ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
-            ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
-            ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
-            ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
+          ◎   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
+        ▲41 ▼36 ◀35   ▥   ▥   ▥   ▥   ▥   ▥   ▥
+        ▲40 ▼37 ▲34   ▥   ▥ ▼23 ◀22 ◀21   ▥   ▥
+        ▲39 ◀38 ▲33 ◀32   ▥ ▶24 ▼25 ▲20 ◀19   ▥
+          ▥   ▥   ▥ ▲31   ▥   ▥ ▼26 ▶17 ▲18   ▥
+          ▥   ▥   ▥ ▲30 ◀29 ◀28 ◀27 ▲16 ▼1  🚶
+          ▥   ▥   ▥   ▥   ▥   ▥ ▶14 ▲15 ▼2    ▥
+          ▥   ▥   ▥   ▥ ▶11 ▶12 ▲13 ▼4  ◀3    ▥
+          ▥   ▥   ▥   ▥ ▲10 ◀9  ▼6  ◀5    ▥   ▥
+          ▥   ▥   ▥   ▥   ▥ ▲8  ◀7    ▥   ▥   ▥
+
         MAZE
       end
     end

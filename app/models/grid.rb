@@ -9,6 +9,10 @@ class Grid < Struct.new(:width, :height)
     end
   end
 
+  def num_points
+    width * height
+  end
+
   def set_points(*points)
     points.each{|p| set_point(p) }
   end
