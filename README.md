@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/markburns/maze/badges/gpa.svg)](https://codeclimate.com/github/markburns/maze)
+
 Technical Exercise
 ---------------------------
 
