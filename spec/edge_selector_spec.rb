@@ -1,5 +1,6 @@
 describe EdgeSelector do
-  let(:selector) { EdgeSelector.new(10,10, random) }
+  let(:grid) { double width: 10, height: 10 }
+  let(:selector) { EdgeSelector.new(grid, random) }
   let(:random) { Random.new 10 }
 
   it "selects a random point on the edge of a grid" do
