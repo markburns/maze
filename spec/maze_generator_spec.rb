@@ -11,9 +11,7 @@ describe MazeGenerator do
     expect(maze_string).not_to include "w"
   end
 
-  context "with a seeded random number" do
-    let(:random) { Random.new 1 }
-
+  describe "#start and #finish" do
     before do
       expect(edge_selector).to receive(:next_point).and_return point
     end
