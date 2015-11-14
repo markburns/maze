@@ -40,7 +40,7 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
   end
 
   def wall_points
-    @maze.points.select{|p| p.kind_of?(Wall)}
+    @maze.points_of_type(Wall)
   end
 
   def walls_remaining?
