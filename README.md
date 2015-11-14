@@ -262,10 +262,12 @@ or hit a deadend. So we need to be able to traverse back further and record wher
 
 
 Missing Space and Deadends are fixed
+------------------------
 
 and removing the debug info for paths the mazes look like this:
 
-          ▼▶▼▲◀▼▼◀▶▼
+```
+          🚶▼▶▼▲◀▼▼◀▶▼
           ▶▲▼▥▲▼▼▲▼◀
           ▶▥▶▶▲▼▥▲▼▥
           ▼◀◀▶▼▶▼▲◀▼
@@ -274,3 +276,4 @@ and removing the debug info for paths the mazes look like this:
           ▶▼▲◀▥▼▥▼◀▼
           ▥▼▼▲◀▶▼▼▥◀
           ▶◀▶▥▲◀◀▶▶◎
+```
