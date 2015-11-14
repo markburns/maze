@@ -43,22 +43,30 @@ class Path
       if points.any?
         decrement_dead_end_count!
       else
-        @dead_end_count += 1
-
-        if @dead_end_count >= 3
-          traversed_points << p
-          return [p, DeadEnd.from(p)]
-        else
-          previous_point = path.pop
-          if previous_point.nil?
-            return [DeadEnd.from(p), DeadEnd.from(p)]
-          else
-            return next_point(previous_point)
-          end
-        end
+        return handle_dead_end(p)
       end
 
       points.sample(random: random)
+    end
+
+
+    def handle_dead_end(p)
+      @dead_end_count += 1
+
+      dead_end = DeadEnd.from(p)
+
+      if @dead_end_count >= 3
+        traversed_points << p
+        return [p, dead_end]
+      else
+        previous_point = path.pop
+
+        if previous_point.nil?
+          return [dead_end, dead_end]
+        else
+          return next_point(previous_point)
+        end
+      end
     end
 
     def next_candidate_path_points(here, points=placeable_locations)
