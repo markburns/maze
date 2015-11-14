@@ -1,8 +1,8 @@
 class EdgeSelector < Struct.new(:grid, :random)
   delegate :width, :height, to: :grid
 
-  def next_point
-    edge_points.sample
+  def next_point(klass=Point)
+    edge_points.select{|p| p.kind_of?(klass)}.sample
   end
 
   def edge?(p)

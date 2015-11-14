@@ -2,7 +2,11 @@ class Grid < Struct.new(:width, :height)
   include Visitor::GridVisitable
 
   def rows
-    @rows ||= height.times.map do |y|
+    @rows ||= initialize_rows
+  end
+
+  def initialize_rows
+    height.times.map do |y|
       width.times.map do |x|
         Wall.new(x,y)
       end
@@ -13,8 +17,8 @@ class Grid < Struct.new(:width, :height)
     rows.flatten
   end
 
-  def points_of_type(klass)
-    points.select{|p| p.kind_of?(klass)}
+  def points_of_type(*klasses)
+    points.select{|p| klasses.any?{|k| p.kind_of?(k)}}
   end
 
   def num_points
@@ -26,6 +30,6 @@ class Grid < Struct.new(:width, :height)
   end
 
   def set_point(p)
-    rows[p.y][p.x]=p
+    @rows[p.y][p.x]=p
   end
 end

@@ -32,6 +32,10 @@ module Visitor
       format "▶", subject
     end
 
+    def visit_PathDeadEnd subject
+      " x  "
+    end
+
     private
 
     def format(symbol, path_point)

@@ -1,3 +1,3 @@
-class FinishPoint < Point
+class FinishPoint < Path::Location
 end
 

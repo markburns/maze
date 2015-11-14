@@ -9,11 +9,12 @@ class Maze < Grid
   end
 
   def rows
-    @rows ||=
-      begin
-        super
-        set_points(start, finish)
-        @rows
-      end
+    @rows ||= define_rows
+  end
+
+  def define_rows
+    @rows = initialize_rows
+    set_points(start, finish)
+    @rows
   end
 end

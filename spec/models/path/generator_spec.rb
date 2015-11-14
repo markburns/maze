@@ -32,55 +32,14 @@ describe Path::Generator do
     end
   end
 
-  describe "#define_points!" do
+  describe "#create_path!" do
     it "starts at the start" do
-      path_generator.define_points!
-      point = path_generator.path.first
+      path = path_generator.create_path!
 
-      expect(point).to eq start
+      expect(path.first).to eq start
     end
   end
 
-  context "testing visitors" do
-    let(:with_path) { path_generator.maze.accept(visitor) }
 
-    context "with a String visitor" do
-      let(:visitor) { Visitor::String.new }
-      pending do
-        match_grid with_path, <<-MAZE
-          fwwwwwwwww
-          ^v<wwwwwww
-          ^v^wwv<<ww
-          ^<^<w<v^<w
-          www^wwv<^w
-          www^<<<^vs
-          wwwwww<^vw
-          wwww<<^v<w
-          wwww^<v<ww
-          wwwww^<www
-        MAZE
-      end
-    end
-
-    context "with an emoji visitor" do
-      let(:visitor) { Visitor::Emoji.new }
-
-      pending "adds a path to the maze" do
-        match_grid with_path, <<-MAZE
-          ◎   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥   ▥
-        ▲41 ▼36 ◀35   ▥   ▥   ▥   ▥   ▥   ▥   ▥
-        ▲40 ▼37 ▲34   ▥   ▥ ▼23 ◀22 ◀21   ▥   ▥
-        ▲39 ◀38 ▲33 ◀32   ▥ ▶24 ▼25 ▲20 ◀19   ▥
-          ▥   ▥   ▥ ▲31   ▥   ▥ ▼26 ▶17 ▲18   ▥
-          ▥   ▥   ▥ ▲30 ◀29 ◀28 ◀27 ▲16 ▼1  🚶
-          ▥   ▥   ▥   ▥   ▥   ▥ ▶14 ▲15 ▼2    ▥
-          ▥   ▥   ▥   ▥ ▶11 ▶12 ▲13 ▼4  ◀3    ▥
-          ▥   ▥   ▥   ▥ ▲10 ◀9  ▼6  ◀5    ▥   ▥
-          ▥   ▥   ▥   ▥   ▥ ▲8  ◀7    ▥   ▥   ▥
-
-        MAZE
-      end
-    end
-  end
 end
 

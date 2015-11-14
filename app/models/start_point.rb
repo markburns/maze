@@ -1,3 +1,3 @@
-class StartPoint < Point
+class StartPoint < Path::Location
 end
 

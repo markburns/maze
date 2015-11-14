@@ -31,5 +31,9 @@ module Visitor
     def visit_PathRight subject
       "<"
     end
+
+    def visit_PathDeadEnd subject
+      "x"
+    end
   end
 end
