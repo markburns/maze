@@ -15,6 +15,4 @@ class Path < Array
   def dead_end!
     @dead_end = true
   end
-
-
 end
