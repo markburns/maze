@@ -25,9 +25,7 @@ class MazeGenerator < Struct.new(:grid, :edge_selector, :random)
   end
 
   def remove_all_walls!
-    @loops = 0
     while walls_remaining?
-      @loops += 1
       start  = random_wall_point
       finish = random_wall_point
 
