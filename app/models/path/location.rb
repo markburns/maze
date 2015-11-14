@@ -1,7 +1,6 @@
 class Path
   class Location < ::Point
     def self.from(other, index=0)
-      byebug if other.nil?
       new(other.x, other.y, index)
     end
 
