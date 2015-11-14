@@ -10,15 +10,12 @@ class Path
     end
 
     def create_path!
-      index = 0
       point=start
 
       @dead_end_count = 0
 
       until stop_search?(point)
-        here, next_p, index = next_point(point, index)
-        here.index = index
-
+        here, next_p  = next_point(point)
         path.push(here)
 
         traversed_points << here
@@ -52,50 +49,53 @@ class Path
       @path ||= Path.new
     end
 
-    def pretty_path(index)
+    def pretty_path
       @visitor ||= Visitor::Emoji.new
       message = path.accept(@visitor).join("\t")
       puts message
     end
 
-    def next_point(p, index=0)
-      points = non_path_points(p, index)
+    def next_point(p)
+      points = non_path_points(p)
 
       if points.any?
-        @dead_end_count ||= 0
-        @dead_end_count = [@dead_end_count - 1, 0].max
+        decrement_dead_end_count!
       else
         @dead_end_count += 1
 
         if @dead_end_count >= 3
           traversed_points << p
-          return [p, DeadEnd.from(p), index]
+          return [p, DeadEnd.from(p)]
         else
           previous_point = path.pop
           if previous_point.nil?
-            return [DeadEnd.from(p), DeadEnd.from(p), index-1]
+            return [DeadEnd.from(p), DeadEnd.from(p)]
           else
-            return next_point(previous_point, index-1)
+            return next_point(previous_point)
           end
         end
       end
 
-      [*points.sample(random: random), index + 1]
+      points.sample(random: random)
     end
 
+    def decrement_dead_end_count!
+      @dead_end_count ||= 0
+      @dead_end_count = [@dead_end_count - 1, 0].max
+    end
 
-    def next_candidate_path_points(here, index=0, points=placeable_locations)
+    def next_candidate_path_points(here, points=placeable_locations)
       points.map do |other|
         if klass = other.adjacent_to?(here)
-          [klass.from(here, index), other]
+          [klass.from(here), other]
         end
       end.compact
     end
 
     private
 
-    def non_path_points(p, index)
-      candidate_points = next_candidate_path_points(p, index)
+    def non_path_points(p)
+      candidate_points = next_candidate_path_points(p)
 
       here, finish = candidate_points.find do |here, next_point|
         next_point.kind_of?(FinishPoint)
