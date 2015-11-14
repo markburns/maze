@@ -1,13 +1,8 @@
-class EdgeSelector < Struct.new(:width, :height, :random)
+class EdgeSelector < Struct.new(:grid, :random)
+  delegate :width, :height, to: :grid
+
   def next_point
-    point = random_point
-
-    #TODO find a smarter way to do this
-    until edge?(point)
-      point = random_point
-    end
-
-    point
+    edge_points.sample
   end
 
   def edge?(p)
@@ -16,11 +11,22 @@ class EdgeSelector < Struct.new(:width, :height, :random)
 
   private
 
-  def random_point
-    x = random.rand(width)
-    y = random.rand(height)
+  def edge_points
+    @edge_points ||= find_edges
+  end
 
-    point = Point.new x, y
+  def find_edges
+    edge_points = []
+
+    width.times do |x|
+      height.times do |y|
+        p = Point.new(x, y)
+
+        edge_points.push(p) if edge?(p)
+      end
+    end
+
+    edge_points
   end
 
   def left?(point)
